@@ -7,8 +7,6 @@ import os
 
 ### Local application imports
 
-import tasks as tasks
-import menu as menu
 
 
 
@@ -30,10 +28,10 @@ def exit_menu():
     sys.exit()
 
 
-def get_menu_data(menu_number):
+def get_menu_data(selected_menu_number, dict_data):
     """ Gets from specific menu data (using menu unique identifier)
         from the dictionary data structure """
-    choosen_menu = menu.dict_menu[menu_number]
+    choosen_menu = dict_data[selected_menu_number]
     return choosen_menu
 
 
@@ -113,19 +111,31 @@ def make_menu_choice(menu_table):
             print('\nPlease try again...\n')
 
 
-def load_task_choice(function_name, menu_number):
+def load_task_choice(function_name, menu_number, task_filename):
     """ Pass function name of task and previous menu number in using arguement """
 
-    func_to_run = getattr(tasks, function_name)
+    # Imports a dynamically named (tasks) module based on filename passed into the display_menu function
+    # from the main.py and onward into this function
+    # Equivalent import <filename> as module_name
+    tasks_module_name = __import__(task_filename)
+
+    func_to_run = getattr(tasks_module_name, function_name)
     previous_menu = func_to_run(menu_number)
     return previous_menu
 
 
-def display_menu(selected_menu_number):
+def display_menu(dict_filename, task_filename):
     """ Loops through a process for generating the choosen menu
     displays and/or running selected task, unless the exit function is called. """
+
+    # Imports a dynamically named (dictionary) module based on filename passed into the display_menu function
+    # from the main.py
+    # Equivalent import <filename> as dict_module_name
+    dict_module_name = __import__(dict_filename)
+
+    selected_menu_number = 1
     while True:
-        menu_data = get_menu_data(selected_menu_number)
+        menu_data = get_menu_data(selected_menu_number, dict_module_name.dict_menu)
 
         select_menu_header(menu_data)
         func_options = load_menu_list(menu_data)
@@ -137,7 +147,7 @@ def display_menu(selected_menu_number):
 
         elif 'task' in function_name:
             clear_screen()
-            prev_menu_number = load_task_choice(function_name, selected_menu_number)
+            prev_menu_number = load_task_choice(function_name, selected_menu_number, task_filename)
             selected_menu_number = int(prev_menu_number)
 
         else:
