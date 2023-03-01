@@ -13,8 +13,7 @@
 <br>
 <b>Client solution - Main:</b> I created a command line menu system underpinned by a dictionary data structure. The main menu, all sub-menus and menu items (menu option descriptions and associated function names) are stored in the dictionary. Please see the commented code for more details on how it works.<br>
 <br>
-<b>Generalised solution - Branch:</b> This is a generalised version of the main project that uses dynamic module names. 
-In particular, the names of the dynamic module names (e.g. generic_tasks.py and generic_dictionary.py) are passed as arguments directly into the display_menu function within the interface.py; This allows this command line project to be used by anyone with their own dictionary and tasks py files. Furthermore, I also removed the selected_menu_number from the argument passed into the display_menu function within the interface.py; instead the variable is declared (with first number number) before the while loop; the selected_menu_number variable is updated within the loop as previously. <br>
+<b>Generalised solution - Branch <i>( Generalised version with dynamic module names)</i>:</b> This is a generalised version of the main project that uses dynamic module names. In particular, the names of the dynamic module names (e.g. generic_tasks.py and generic_dictionary.py) are passed as arguments directly into the display_menu function within the interface.py; This allows this command line project to be used by anyone with their own dictionary and tasks py files. Furthermore, I also removed the selected_menu_number from the argument passed into the display_menu function within the interface.py; instead the variable is declared (with first number number) before the while loop; the selected_menu_number variable is updated within the loop as previously. <br>
 <br>
 <b>Config overview:</b><br>
 • conda version : 23.1.0<br>
